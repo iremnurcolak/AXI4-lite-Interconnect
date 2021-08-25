@@ -109,9 +109,9 @@ parameter [32*numOfMasters-1:0] base_address_of_masters = 0, //master 15'ten 0'a
     always @(s_axi_araddr or s_axi_awaddr) begin
         if(s_axi_arvalid==1)begin
             for(n=0;n<numOfMasters;n++)begin
-               if($signed(s_axi_araddr)<=$signed(ranges_of_masters[n+:32]+base_address_of_masters_r[n+:32]-1) && s_axi_araddr>=base_address_of_masters_r[n+:32]) begin
+               if($signed(s_axi_araddr)<=$signed(ranges_of_masters[n*32+:32]+base_address_of_masters_r[n*32+:32]-1) && s_axi_araddr>=base_address_of_masters_r[n*32+:32]) begin
                    master_no_read=n;
-                   master_addr_read=s_axi_araddr-base_address_of_masters_r[n+:32];
+                   master_addr_read=s_axi_araddr-base_address_of_masters_r[n*32+:32];
                end         
             end       
         end
