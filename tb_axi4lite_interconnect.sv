@@ -3,7 +3,9 @@
    module tb_axi4lite_interconnect(
 
     );
-    
+    integer seed;
+    assign seed = 12;
+
     integer i=0;
     reg [31:0] m;
     reg s_axi_aclk;
@@ -68,6 +70,7 @@
     
     
     initial begin
+      $srandom(seed);
         s_axi_aclk=1;s_axi_areset=1;
         #10;
         /*
